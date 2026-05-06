@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AI Chat</title><title标题>AI聊天</title标题>
+<title>AI Chat</title>
 
 <style>
 body { font-family: Arial; background: #f5f5f5; }
@@ -10,16 +10,16 @@ body { font-family: Arial; background: #f5f5f5; }
     width: 500px;
     height: 500px;
     margin: auto;
-    background: white;背景: 白色;
-    overflow-y: scroll;溢出-y: 滚动;
-    padding: 10px;内边距: 10像素;
+    background: white;
+    overflow-y: scroll;
+    padding: 10px;
     border-radius: 10px;
 }
-.msg {.消息 {.消息 {.消息 {
+.msg {
     margin: 10px 0;
-    padding: 10px;内边距: 10像素;
+    padding: 10px;
     border-radius: 10px;
-    max-width: 70%;最大宽度: 70%;
+    max-width: 70%;
 }
 .user { background: #4CAF50; color: white; margin-left: auto; }
 .ai { background: #e0e0e0; }
@@ -56,9 +56,9 @@ let user_id = localStorage.getItem("user_id");
 function login() {
     let username = document.getElementById("username").value;
 
-    fetch("https://elephantchat-production.up.railway.app/login?username=" + username)
+    fetch("https://elephantchat-production.up.railway.app/clear?user_id=" + user_id)
     .then(res => res.json())
-    .then(data => {    .然后(data => {
+    .then(data => {
         if (data.code === 0) {
             user_id = data.data.user_id;
             localStorage.setItem("user_id", user_id);
@@ -84,19 +84,19 @@ function send() {
 
     addMessage("你：" + msg, "user");
 
-    fetch("https://elephantchat-production.up.railway.app/chat", {
+    fetch("https://elephantchat-production.up.railway.app/clear?user_id=" , {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            msg: msg,消息: 消息,
-            user_id: user_id用户ID: 用户ID
+            msg: msg,
+            user_id: user_id
         })
     })
-    .then(res => res.json())    .然后(res => res.json())    .然后(res回复 => res回复.json())    .然后(res回复 => res回复.json())
-    .then(data => {    .然后(data => {
-        if (data.code === 0) {如果 (data.code === 0) {
+    .then(res => res.json())
+    .then(data => {
+        if (data.code === 0) {
             addMessage("AI：" + data.data.reply, "ai");
         } else {
             addMessage("❌ " + data.msg, "ai");
