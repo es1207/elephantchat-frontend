@@ -56,9 +56,9 @@ let user_id = localStorage.getItem("user_id");
 function login() {
     let username = document.getElementById("username").value;
 
-    fetch("https://elephantchat-production.up.railway.app/clear?user_id=" + user_id)
+    fetch("https://elephantchat-production.up.railway.app/login?username=" + username)
     .then(res => res.json())
-    .then(data => {
+    .then(data => {    .然后(data => {
         if (data.code === 0) {
             user_id = data.data.user_id;
             localStorage.setItem("user_id", user_id);
@@ -84,19 +84,19 @@ function send() {
 
     addMessage("你：" + msg, "user");
 
-    fetch("https://elephantchat-production.up.railway.app/clear?user_id=" , {
+    fetch("https://elephantchat-production.up.railway.app/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            msg: msg,
-            user_id: user_id
+            msg: msg,消息: 消息,
+            user_id: user_id用户ID: 用户ID
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        if (data.code === 0) {
+    .then(res => res.json())    .然后(res => res.json())    .然后(res回复 => res回复.json())    .然后(res回复 => res回复.json())
+    .then(data => {    .然后(data => {
+        if (data.code === 0) {如果 (data.code === 0) {
             addMessage("AI：" + data.data.reply, "ai");
         } else {
             addMessage("❌ " + data.msg, "ai");
